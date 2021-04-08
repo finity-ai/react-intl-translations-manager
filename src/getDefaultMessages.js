@@ -46,7 +46,11 @@ export default files => {
       return {
         messages: descriptors.reduce((descAcc, { id, defaultMessage }) => {
           if (descAcc[id] !== undefined) {
-            duplicateIds.push(id);
+            if (defaultMessage) {
+              duplicateIds.push(id);
+            }
+
+            return descAcc;
           }
 
           return { ...descAcc, [id]: defaultMessage };
